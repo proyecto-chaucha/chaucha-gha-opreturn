@@ -46,15 +46,17 @@ jobs:
 
 ### Inputs
 
-| Input                                             | Description                                        |
-|------------------------------------------------------|-----------------------------------------------|
-| `privkey`  | Private Key to sign transaction. Use _PRIVKEY_ in Github Secrets.|
-| `pubkey`  | Public key of the Private key to verify confirmations. Use _PUBKEY_ in Github Secrets.    |
-| `sendkey`  | Public key to send the transaction. Use _SENDKEY_ in Github Secrets.|
-| `message`  | Message to send with `OP_RETURN`. Max 255 chars.|
+|===
+| Input | Description
+| `privkey`  | Private Key to sign transaction. Use _PRIVKEY_ in Github Secrets.
+| `pubkey`  | Public key of the Private key to verify confirmations. Use _PUBKEY_ in Github Secrets.
+| `sendkey`  | Public key to send the transaction. Use _SENDKEY_ in Github Secrets.
+| `message`  | Message to send with `OP_RETURN`. Max 255 chars.
+|===
 
 ### Outputs
 
-| Output                                             | Description                                        |
-|------------------------------------------------------|-----------------------------------------------|
-| `response`  | Response with the `OP_RETURN` result message |
+|===
+| Output | Description
+| `response`  | Response with the `OP_RETURN` result message
+|===
