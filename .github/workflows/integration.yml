@@ -10,9 +10,9 @@ jobs:
 
         uses: proyecto-chaucha/chaucha-gha-opreturn@master
         with:
-          privkey: "${{secret.PRIVKEY}}"
-          pubkey: "${{secret.PUBKEY}}"
-          sendkey: "${{secret.SENDKEY}}"
+          privkey: "${{secrets.PRIVKEY}}"
+          pubkey: "${{secrets.PUBKEY}}"
+          sendkey: "${{secrets.SENDKEY}}"
           message: "repo: ${GITHUB_REPOSITORY}; branch: ${GITHUB_REF}; commit: ${GITHUB_SHA}"
 
       # Certify commit using notes
