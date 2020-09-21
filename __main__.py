@@ -31,7 +31,7 @@ def main():
         exit(-1)
 
     action.debug("Sending the OP_RETURN")
-    response = opreturn.send(privkey, pubkey, sendkey, message)
+    response = opreturn.send(privkey, pubkey, sendkey, message, force=True)
 
     if not response:
         action.error("Could not send OP_RETURN")

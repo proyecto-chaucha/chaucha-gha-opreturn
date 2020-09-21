@@ -1,6 +1,11 @@
 name: "Chaucha OP_RETURN Github Action"
 description: "A simple Github Action to use OP_RETURN in Chaucha network"
 author: "Camilo Castro <camilo@ninjas.cl>"
+
+branding:
+  icon: git
+  color: green
+
 inputs:
   privkey:
     description: "Private Key to sign transaction"
@@ -14,9 +19,11 @@ inputs:
   message:
     description: "Message to send with OP_RETURN"
     required: true
+
 outputs:
   response:
     description: "Output from the chaucha insight"
+
 runs:
   using: "docker"
   image: "Dockerfile"
