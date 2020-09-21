@@ -1,13 +1,22 @@
-name: "Python Container Action Template"
-description: "Get started with Python Container actions"
-author: "Jacob Tomlinson"
+name: "Chaucha OP_RETURN Github Action"
+description: "A simple Github Action to use OP_RETURN in Chaucha network"
+author: "Camilo Castro <camilo@ninjas.cl>"
 inputs:
-  myInput:
-    description: "Input to use"
-    default: "world"
+  privkey:
+    description: "Private Key to sign transaction"
+    required: true
+  pubkey:
+    description: "Public key of the Private key to verify confirmations"
+    required: true
+  sendkey:
+    description: "Public key to send the transaction"
+    required: true
+  message:
+    description: "Message to send with OP_RETURN"
+    required: true
 outputs:
-  myOutput:
-    description: "Output from the action"
+  response:
+    description: "Output from the chaucha insight"
 runs:
   using: "docker"
   image: "Dockerfile"
