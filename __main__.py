@@ -8,7 +8,7 @@ def main():
     sendkey = getenv("INPUT_SENDKEY")
     message = getenv("INPUT_MESSAGE")
 
-    response = opreturn.send(privkey, pubkey, sendto, message)
+    response = opreturn.send(privkey, pubkey, sendkey, message)
 
     print(f"::set-output name=response::{response}")
 
