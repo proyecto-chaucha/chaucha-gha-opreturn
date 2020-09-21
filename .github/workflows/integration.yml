@@ -13,7 +13,7 @@ jobs:
           privkey: "${{secrets.PRIVKEY}}"
           pubkey: "${{secrets.PUBKEY}}"
           sendkey: "${{secrets.SENDKEY}}"
-          message: "repo: ${GITHUB_REPOSITORY} ; branch: ${GITHUB_REF} ; commit: ${GITHUB_SHA}"
+          message: "repo: ${{github.repository}} ; branch: ${{github.ref}} ; commit: ${{github.sha}}"
 
       # Certify commit using notes
       - run: |
