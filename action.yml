@@ -1,5 +1,5 @@
-name: "Chaucha OP_RETURN Github Action"
-description: "A simple Github Action to use OP_RETURN in Chaucha network"
+name: "Chaucha Commit Notarization Github Action"
+description: "A simple Github Action to use OP_RETURN in Chaucha network and notarize commit history."
 author: "Camilo Castro <camilo@ninjas.cl>"
 
 branding:
