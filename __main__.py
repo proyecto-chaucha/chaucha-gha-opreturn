@@ -5,9 +5,9 @@ from chaucha import opreturn
 
 
 def main():
-    
+
     privkey = getenv("INPUT_PRIVKEY")
-    
+
     if not privkey:
         action.error("Private Key not found")
         exit(-1)
@@ -17,7 +17,7 @@ def main():
     if not pubkey:
         action.error("Public Key not found")
         exit(-1)
-    
+
     sendkey = getenv("INPUT_SENDKEY")
 
     if not sendkey:

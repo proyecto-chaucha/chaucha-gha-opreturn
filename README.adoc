@@ -1,78 +1,60 @@
-# Chaucha Commit Certification
+# Chaucha Commit Notarization
 
-Using _Chaucha_ blockchain, commits can be certified
-using _OP_RETURN_.
+Using https://chaucha.cl[_Chaucha_] blockchain, commits can be certified
+using _OP_RETURN_. Now _Github_ history can be *notarized*.
+
+image:https://user-images.githubusercontent.com/292738/93739829-9546ec80-fbbf-11ea-9c66-a1b7c1dfca99.png[OP_RETURN]
+
+image:https://user-images.githubusercontent.com/292738/93740190-654c1900-fbc0-11ea-898c-bc7e0e20ab9f.png[OP_RETURN in Explorer]
+
+image:https://user-images.githubusercontent.com/292738/93740118-3c2b8880-fbc0-11ea-9356-f6d3a4904075.png[OP_RETURN Decoded]
 
 ## Usage
 
-Describe how to use your action here.
+Using a mixture of `OP_RETURN` and https://github.com/NinjasCL/gha-notes[Git Notes] we can
+notarize each commit.
 
 ### Example workflow
 
 ```yaml
-name: My Workflow
-on: [push, pull_request]
+name: Integration Test
+on: [push]
 jobs:
   build:
     runs-on: ubuntu-latest
     steps:
-    - uses: actions/checkout@master
-    - name: Run action
+      - uses: actions/checkout@v2
+      - name: Self test
+        id: selftest
 
-      # Put your action repo here
-      uses: me/myaction@master
+        uses: proyecto-chaucha/chaucha-gha-opreturn@master
+        with:
+          privkey: "${{secrets.PRIVKEY}}"
+          pubkey: "${{secrets.PUBKEY}}"
+          sendkey: "${{secrets.SENDKEY}}"
+          message: "repo: ${{github.repository}};branch: ${{github.ref}};commit: ${{github.sha}}"
 
-      # Put an example of your mandatory inputs here
-      with:
-        myInput: world
+      # Save certification using git-notes
+      - run: |
+          git config user.name "$GITHUB_ACTOR"
+          git config user.email "$GITHUB_ACTOR@users.noreply.github.com"
+          git fetch origin "refs/notes/*:refs/notes/*"
+          git notes append -m "repo: $GITHUB_REPOSITORY ; branch: $GITHUB_REF ; commit: $GITHUB_SHA ; tx: ${{steps.selftest.outputs.response}}"
+          git push origin "refs/notes/*"
+
 ```
 
 ### Inputs
 
 | Input                                             | Description                                        |
 |------------------------------------------------------|-----------------------------------------------|
-| `myInput`  | An example mandatory input    |
-| `anotherInput` _(optional)_  | An example optional input    |
+| `privkey`  | Private Key to sign transaction. Use _PRIVKEY_ in Github Secrets.|
+| `pubkey`  | Public key of the Private key to verify confirmations. Use _PUBKEY_ in Github Secrets.    |
+| `sendkey`  | Public key to send the transaction. Use _SENDKEY_ in Github Secrets.|
+| `message`  | Message to send with `OP_RETURN`. Max 255 chars.|
 
 ### Outputs
 
 | Output                                             | Description                                        |
 |------------------------------------------------------|-----------------------------------------------|
-| `myOutput`  | An example output (returns 'Hello world')    |
-
-## Examples
-
-> NOTE: People ❤️ cut and paste examples. Be generous with them!
-
-### Using the optional input
-
-This is how to use the optional input.
-
-```yaml
-with:
-  myInput: world
-  anotherInput: optional
-```
-
-### Using outputs
-
-Show people how to use your outputs in another action.
-
-```yaml
-steps:
-- uses: actions/checkout@master
-- name: Run action
-  id: myaction
-
-  # Put your action name here
-  uses: me/myaction@master
-
-  # Put an example of your mandatory arguments here
-  with:
-    myInput: world
-
-# Put an example of using your outputs here
-- name: Check outputs
-    run: |
-    echo "Outputs - ${{ steps.myaction.outputs.myOutput }}"
-```
+| `response`  | Response with the `OP_RETURN` result message |
