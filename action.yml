@@ -3,7 +3,7 @@ description: "A simple Github Action to use OP_RETURN in Chaucha network and not
 author: "Camilo Castro <camilo@ninjas.cl>"
 
 branding:
-  icon: git
+  icon: anchor
   color: green
 
 inputs:
